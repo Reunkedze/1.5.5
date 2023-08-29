@@ -31,13 +31,12 @@ export default class App extends Component {
   };
 
   clearItems = () => {
-    console.log('Clear');
-    // this.setState(({ todoData }) => {
-    //   const newArray = todoData.map((el) => el.done === false);
-    //   return {
-    //     todoData: newArray,
-    //   };
-    // });
+    this.setState(({ todoData }) => {
+      const newArray = this.state.todoData.filter((el) => !el.done);
+      return {
+        todoData: newArray,
+      };
+    });
   };
 
   addItem = (text) => {
