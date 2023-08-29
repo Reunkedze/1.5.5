@@ -2,7 +2,7 @@ import Footer from '../Footer';
 import Task from '../Task';
 import './TaskList.css';
 
-const TaskList = ({ todos, show, onDeleted, onToggleDone, todo, done, onFilter }) => {
+const TaskList = ({ todos, show, onDeleted, onToggleDone, todo, done, onFilter, onClear }) => {
   const elements = todos.map((item) => {
     const { id, ...itemProps } = item;
     if (show === 'all' || (show === 'active' && !itemProps.done) || (show === 'completed' && itemProps.done)) {
@@ -60,7 +60,7 @@ const TaskList = ({ todos, show, onDeleted, onToggleDone, todo, done, onFilter }
         </li> */}
         {elements}
       </ul>
-      <Footer todo={todo} done={done} onFilter={onFilter} />
+      <Footer todo={todo} done={done} onFilter={onFilter} onClear={onClear} />
     </section>
   );
 };

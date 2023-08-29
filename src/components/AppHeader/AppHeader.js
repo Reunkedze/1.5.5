@@ -1,4 +1,4 @@
-import NewTaskForm from "../NewTaskForm";
+import NewTaskForm from '../NewTaskForm';
 
 const AppHeader = ({ onItemAdded }) => {
   return (
@@ -7,6 +7,6 @@ const AppHeader = ({ onItemAdded }) => {
       <NewTaskForm onItemAdded={onItemAdded} />
     </header>
   );
-}
+};
 
 export default AppHeader;

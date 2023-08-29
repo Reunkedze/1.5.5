@@ -30,6 +30,16 @@ export default class App extends Component {
     });
   };
 
+  clearItems = () => {
+    console.log('Clear');
+    // this.setState(({ todoData }) => {
+    //   const newArray = todoData.map((el) => el.done === false);
+    //   return {
+    //     todoData: newArray,
+    //   };
+    // });
+  };
+
   addItem = (text) => {
     // generate id
     const newItem = this.createItem(text);
@@ -79,6 +89,7 @@ export default class App extends Component {
           todo={todoCount}
           done={doneCount}
           onFilter={this.filterItems}
+          onClear={this.clearItems}
         />
       </section>
     );

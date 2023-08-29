@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class TasksFilter extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class TasksFilter extends Component {
           <button
             className="selected"
             onClick={() => {
-              onFilter("all");
+              onFilter('all');
             }}
           >
             All
@@ -18,7 +18,7 @@ export default class TasksFilter extends Component {
         <li>
           <button
             onClick={() => {
-              onFilter("active");
+              onFilter('active');
             }}
           >
             Active
@@ -27,7 +27,7 @@ export default class TasksFilter extends Component {
         <li>
           <button
             onClick={() => {
-              onFilter("completed");
+              onFilter('completed');
             }}
           >
             Completed
