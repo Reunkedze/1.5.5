@@ -1,15 +1,15 @@
-import TasksFilter from '../TasksFilter';
+import TasksFilter from '../TasksFilter'
 
-const Footer = ({ todo, done, todos, onFilter, onClear }) => {
+const Footer = ({ todo, onFilter, onClear, show }) => {
   return (
     <footer className="footer">
       <span className="todo-count">{todo} items left</span>
-      <TasksFilter onFilter={onFilter} />
+      <TasksFilter onFilter={onFilter} show={show} />
       <button className="clear-completed" onClick={onClear}>
         Clear completed
       </button>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

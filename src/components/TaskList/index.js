@@ -1,3 +1,3 @@
-import TodoList from './TaskList';
+import TodoList from './TaskList'
 
-export default TodoList;
+export default TodoList

@@ -1,0 +1,16 @@
+fieldset {
+  border: none;
+}
+
+.filter-input {
+  display: none;
+}
+
+.filter-label {
+  margin: 0 5px;
+  padding: 5px 10px;
+}
+
+.filter-input:checked + label {
+  border: 1px solid black;
+}
