@@ -9,6 +9,10 @@ export default class Task extends Component {
     timer: null,
   }
 
+  componentWillUnmount() {
+    clearInterval(this.state.timer)
+  }
+
   start = () => {
     if (!this.state.timer) {
       this.setState({
