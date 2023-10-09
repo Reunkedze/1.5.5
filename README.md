@@ -1,3 +1,3 @@
 ## Todo application
 
-https://todo-reunkedze.vercel.app/
+https://todo-swart-iota.vercel.app/
