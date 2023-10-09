@@ -1,99 +1,86 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 import TaskList from '../TaskList'
 import AppHeader from '../AppHeader'
 import './App.css'
 
-export default class App extends Component {
-  maxId = 0
+const App = () => {
+  let maxId = 0
 
-  state = {
-    show: 'all',
-    todoData: [this.createItem('Drink coffee'), this.createItem('Make App'), this.createItem('Have a lunch')],
-  }
-
-  createItem(label, min, sec) {
+  const createItem = function (label, min, sec) {
     return {
       label,
       done: false,
-      id: this.maxId++,
+      id: maxId++,
       time: new Date(),
       min,
       sec,
     }
   }
 
-  deleteItem = (id) => {
-    this.setState(({ todoData }) => {
+  const [show, setShow] = useState('all')
+  const [todoData, setTodoData] = useState([
+    createItem('Drink coffee'),
+    createItem('Make App'),
+    createItem('Have a lunch'),
+  ])
+
+  const deleteItem = (id) => {
+    setTodoData((todoData) => {
       const idx = todoData.findIndex((el) => el.id === id)
       const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)]
-      return {
-        todoData: newArray,
-      }
+      return newArray
     })
   }
 
-  clearItems = () => {
-    this.setState(({ todoData }) => {
+  const clearItems = () => {
+    setTodoData((todoData) => {
       const newArray = todoData.filter((el) => !el.done)
-      return {
-        todoData: newArray,
-      }
+      return newArray
     })
   }
 
-  addItem = (text, min, sec) => {
-    // generate id
-    const newItem = this.createItem(text, min, sec)
-    // add element in array
-    this.setState(({ todoData }) => {
+  const addItem = (text, min, sec) => {
+    const newItem = createItem(text, min, sec)
+    setTodoData((todoData) => {
       const newArray = [...todoData, newItem]
-
-      return {
-        todoData: newArray,
-      }
+      return newArray
     })
   }
 
-  onToggleDone = (id) => {
-    this.setState(({ todoData }) => {
+  const onToggleDone = (id) => {
+    setTodoData((todoData) => {
       const idx = todoData.findIndex((el) => el.id === id)
       const oldItem = todoData[idx]
       const newItem = { ...oldItem, done: !oldItem.done }
       const newArray = [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)]
-      return {
-        todoData: newArray,
-      }
+      return newArray
     })
   }
 
-  filterItems = (param) => {
-    this.setState(() => {
-      return { show: param }
-    })
+  const filterItems = (param) => {
+    setShow(() => param)
   }
 
-  render() {
-    const { todoData, show } = this.state
+  const doneCount = todoData.filter((el) => el.done).length
 
-    const doneCount = todoData.filter((el) => el.done).length
+  const todoCount = todoData.length - doneCount
 
-    const todoCount = todoData.length - doneCount
-
-    return (
-      <section className="todoapp">
-        <AppHeader onItemAdded={this.addItem} />
-        <TaskList
-          todos={todoData}
-          show={show}
-          onDeleted={this.deleteItem}
-          onToggleDone={this.onToggleDone}
-          todo={todoCount}
-          done={doneCount}
-          onFilter={this.filterItems}
-          onClear={this.clearItems}
-        />
-      </section>
-    )
-  }
+  return (
+    <section className="todoapp">
+      <AppHeader onItemAdded={addItem} />
+      <TaskList
+        todos={todoData}
+        show={show}
+        onDeleted={deleteItem}
+        onToggleDone={onToggleDone}
+        todo={todoCount}
+        done={doneCount}
+        onFilter={filterItems}
+        onClear={clearItems}
+      />
+    </section>
+  )
 }
+
+export default App

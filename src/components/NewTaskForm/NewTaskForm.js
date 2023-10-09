@@ -1,55 +1,51 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './NewTaskForm.css'
 
-export default class NewTaskForm extends Component {
-  state = {
-    label: '',
-    min: '',
-    sec: '',
+const NewTaskForm = ({ onItemAdded }) => {
+  const [label, setLabel] = useState('')
+  const [time, setTime] = useState({ min: '', sec: '' })
+
+  const onLabelChange = (e) => {
+    setLabel(e.target.value)
   }
 
-  onLabelChange = (e) => {
-    this.setState({
-      label: e.target.value,
-    })
-  }
+  // onMinChange = (e) => {
+  //   this.setState({
+  //     min: e.target.value,
+  //   })
+  // }
 
-  onMinChange = (e) => {
-    this.setState({
-      min: e.target.value,
-    })
-  }
+  // onSecChange = (e) => {
+  //   this.setState({
+  //     sec: e.target.value,
+  //   })
+  // }
 
-  onSecChange = (e) => {
-    this.setState({
-      sec: e.target.value,
-    })
-  }
-
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     console.log(e.keycode)
     e.preventDefault()
-    this.props.onItemAdded(this.state.label, this.state.min, this.state.sec)
-    this.setState({
-      label: '',
-      min: '',
-      sec: '',
-    })
+    onItemAdded(label, time.min, time.sec)
+    setLabel('')
+    setTime({ min: '', sec: '' })
+    // this.setState({
+    //   label: '',
+    //   min: '',
+    //   sec: '',
+    // })
   }
 
-  render() {
-    return (
-      <form className="task-form" onSubmit={this.onSubmit}>
-        <input
-          className="new-todo task"
-          name="label"
-          placeholder="Task"
-          onChange={this.onLabelChange}
-          value={this.state.label}
-          autoFocus
-          required
-        />
-        <input
+  return (
+    <form className="task-form" onSubmit={onSubmit}>
+      <input
+        className="new-todo task"
+        name="label"
+        placeholder="Task"
+        onChange={onLabelChange}
+        value={label}
+        autoFocus
+        required
+      />
+      {/* <input
           className="new-todo min"
           name="min"
           placeholder="Min"
@@ -64,8 +60,9 @@ export default class NewTaskForm extends Component {
           onChange={this.onSecChange}
           value={this.state.sec}
           required
-        />
-      </form>
-    )
-  }
+        /> */}
+    </form>
+  )
 }
+
+export default NewTaskForm
